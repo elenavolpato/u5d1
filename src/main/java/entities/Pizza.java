@@ -3,19 +3,37 @@ package entities;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@SuperBuilder
 @Getter
 @Setter
 @ToString(callSuper = true)
 public class Pizza extends MenuItem {
-    List<Topping> toppings;
+    private List<Topping> toppingList = new ArrayList<>();
+    private boolean isXL = false;
 
-    public Pizza(String name, int calories, double price, List<Topping> toppings) {
-        super(name, calories, price);
-        this.toppings = toppings;
+    public Pizza(String name) {
+        this.setName(name);
+    }
+
+    @Override
+    public double getPrice() {
+        //al inizio solo prezzo impasto
+        double total = 4.3;
+        for (Topping t : toppingList){
+            total+= t.getPrice();
+        }
+        return isXL ? total + 2 : total;
+    }
+
+    @Override
+    public int getCalories() {
+        int totalCalories = 700; // calorie dello impasto
+        for(Topping t: toppingList){
+            totalCalories += t.getCalories();
+        }
+        return isXL ? (int)(totalCalories *1.5) : totalCalories;
     }
 }

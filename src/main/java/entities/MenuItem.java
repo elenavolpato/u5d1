@@ -1,9 +1,9 @@
 package entities;
 import lombok.*;
 
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 @ToString
 
 public abstract class MenuItem {
