@@ -16,8 +16,6 @@ public class Pizza extends MenuItem {
 
     public Pizza(String name) {
         this.setName(name);
-        this.getCalories();
-        this.getPrice();
     }
 
     public void addTopping(Topping topping) {
